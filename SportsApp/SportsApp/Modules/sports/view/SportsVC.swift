@@ -11,7 +11,7 @@ import UIKit
 
 class SportsVC: UICollectionViewController,UICollectionViewDelegateFlowLayout {
 
-    let sportsArray = ["baseball", "basketball", "cricket", "soccer"]
+    let sportsArray = ["football","tennis", "basketball", "cricket"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +47,8 @@ class SportsVC: UICollectionViewController,UICollectionViewDelegateFlowLayout {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SportsCell
+        cell.imgMainSportImage.layer.cornerRadius = 20
+        cell.imgMainSportImage.layer.masksToBounds = true
         
         cell.imgMainSportImage.image = UIImage(named: sportsArray[indexPath.row])
         cell.lblMainSportLabel.text = sportsArray[indexPath.row].capitalized
