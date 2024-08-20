@@ -37,11 +37,17 @@
                     <constraint firstAttribute="bottom" secondItem="SCd-j5-JWJ" secondAttribute="bottom" constant="23" id="ELs-sH-daI"/>
                     <constraint firstAttribute="bottom" secondItem="Mel-u0-AaA" secondAttribute="bottom" constant="1" id="I2O-AD-gMn"/>
                     <constraint firstItem="0If-Wz-FCL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="33" id="IOi-gx-DkZ"/>
+                    <constraint firstItem="0If-Wz-FCL" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.14433" id="ZBD-8n-fno"/>
+                    <constraint firstItem="SCd-j5-JWJ" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.53" id="Zns-0j-jHC"/>
+                    <constraint firstItem="0If-Wz-FCL" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.35" id="apF-Wg-7DA"/>
                     <constraint firstItem="SCd-j5-JWJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="137" id="bGp-Ut-aUg"/>
                     <constraint firstItem="0If-Wz-FCL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="334" id="g4D-Er-LCE"/>
+                    <constraint firstItem="Mel-u0-AaA" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.309278" id="gdf-hy-avi"/>
                     <constraint firstAttribute="trailing" secondItem="0If-Wz-FCL" secondAttribute="trailing" constant="-2" id="gg1-hf-1gO"/>
                     <constraint firstItem="SCd-j5-JWJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="nyn-uz-XwE"/>
                     <constraint firstAttribute="trailing" secondItem="SCd-j5-JWJ" secondAttribute="trailing" constant="62" id="oec-Kr-1QW"/>
+                    <constraint firstItem="SCd-j5-JWJ" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.487113" id="uo3-qs-G4g"/>
+                    <constraint firstItem="Mel-u0-AaA" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.97" id="xb6-Q0-nne"/>
                     <constraint firstAttribute="bottom" secondItem="0If-Wz-FCL" secondAttribute="bottom" constant="32" id="yi6-0m-0iT"/>
                     <constraint firstItem="Mel-u0-AaA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="z6J-EU-EAf"/>
                 </constraints>

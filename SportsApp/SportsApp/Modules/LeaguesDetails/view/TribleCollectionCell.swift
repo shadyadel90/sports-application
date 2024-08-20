@@ -9,8 +9,8 @@ import UIKit
 
 class TribleCollectionCell: UICollectionViewCell {
     
-    @IBOutlet weak var rightlbl: UILabel!
+    @IBOutlet weak var scorelbl: UILabel!
     @IBOutlet weak var rightimg: UIImageView!
-    @IBOutlet weak var leftlbl: UILabel!
+
     @IBOutlet weak var leftimg: UIImageView!
 }
