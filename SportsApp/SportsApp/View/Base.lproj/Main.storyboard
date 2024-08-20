@@ -3,31 +3,12 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--favourite league-->
-        <scene sceneID="8bC-ex-3rN">
-            <objects>
-                <viewController title="favourite league" id="Tf2-j7-Axd" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Kac-7j-6PR">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="bqd-ea-gfi"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Favorites" image="star" catalog="system" id="dTA-Uj-VAe">
-                        <color key="badgeColor" systemColor="tintColor"/>
-                    </tabBarItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OW6-sB-j7f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2071" y="-701"/>
-        </scene>
         <!--Sports-->
         <scene sceneID="66a-pk-TGH">
             <objects>
@@ -115,60 +96,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="114" id="s4E-1e-M8K" customClass="LeaguesTableCell" customModule="SportsApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="50" width="393" height="114"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="cdh-XE-UAk">
+                                <rect key="frame" x="0.0" y="50" width="393" height="47.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="s4E-1e-M8K" id="FRu-k5-UZa">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="114"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cdh-XE-UAk" id="OUF-F3-1ST">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="47.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ip7-ci-wu4">
-                                            <rect key="frame" x="5" y="8" width="126" height="102.33333333333333"/>
-                                            <color key="tintColor" systemColor="systemTealColor"/>
-                                            <imageReference key="image" image="photo" catalog="system" symbolScale="small"/>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6OG-69-l8q">
-                                            <rect key="frame" x="154" y="12" width="153" height="90"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="TyJ-7z-rjc">
-                                            <rect key="frame" x="304.33333333333331" y="29.999999999999996" width="78.666666666666686" height="45.666666666666657"/>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" image="video" catalog="system"/>
-                                        </button>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="Ip7-ci-wu4" secondAttribute="trailing" constant="262" id="3jT-sq-7tR"/>
-                                        <constraint firstItem="Ip7-ci-wu4" firstAttribute="width" secondItem="FRu-k5-UZa" secondAttribute="width" multiplier="0.320611" id="5EF-ft-muk"/>
-                                        <constraint firstItem="6OG-69-l8q" firstAttribute="centerX" secondItem="FRu-k5-UZa" secondAttribute="centerX" id="6qG-vc-EfQ"/>
-                                        <constraint firstItem="6OG-69-l8q" firstAttribute="height" secondItem="FRu-k5-UZa" secondAttribute="height" multiplier="0.789474" id="893-4Y-8cL"/>
-                                        <constraint firstItem="TyJ-7z-rjc" firstAttribute="height" secondItem="FRu-k5-UZa" secondAttribute="height" multiplier="0.400585" id="FCY-P1-kgz"/>
-                                        <constraint firstItem="6OG-69-l8q" firstAttribute="top" secondItem="FRu-k5-UZa" secondAttribute="top" constant="12" id="HH2-bV-GYt"/>
-                                        <constraint firstItem="Ip7-ci-wu4" firstAttribute="top" secondItem="FRu-k5-UZa" secondAttribute="top" constant="5" id="Oe4-uG-zam"/>
-                                        <constraint firstAttribute="trailing" secondItem="TyJ-7z-rjc" secondAttribute="trailing" constant="10" id="PiS-9W-Jhc"/>
-                                        <constraint firstAttribute="trailing" secondItem="6OG-69-l8q" secondAttribute="trailing" constant="86" id="REn-Um-FSR"/>
-                                        <constraint firstItem="TyJ-7z-rjc" firstAttribute="top" secondItem="FRu-k5-UZa" secondAttribute="top" constant="29.999999999999996" id="U9j-c3-Cbn"/>
-                                        <constraint firstItem="Ip7-ci-wu4" firstAttribute="height" secondItem="FRu-k5-UZa" secondAttribute="height" multiplier="0.950292" id="V6t-W6-ASy"/>
-                                        <constraint firstItem="6OG-69-l8q" firstAttribute="leading" secondItem="FRu-k5-UZa" secondAttribute="leading" constant="154" id="Vd5-x8-Pak"/>
-                                        <constraint firstItem="Ip7-ci-wu4" firstAttribute="centerY" secondItem="FRu-k5-UZa" secondAttribute="centerY" id="igu-tP-8UF"/>
-                                        <constraint firstAttribute="bottom" secondItem="TyJ-7z-rjc" secondAttribute="bottom" constant="38.333333333333343" id="irE-kL-wGy"/>
-                                        <constraint firstItem="TyJ-7z-rjc" firstAttribute="leading" secondItem="FRu-k5-UZa" secondAttribute="leading" constant="304.33333333333331" id="oSS-Ue-ZlJ"/>
-                                        <constraint firstAttribute="bottom" secondItem="Ip7-ci-wu4" secondAttribute="bottom" constant="0.6666666666666714" id="ty9-Vj-ZLO"/>
-                                        <constraint firstAttribute="bottom" secondItem="6OG-69-l8q" secondAttribute="bottom" constant="12" id="uZl-Hc-Meo"/>
-                                        <constraint firstItem="6OG-69-l8q" firstAttribute="centerY" secondItem="FRu-k5-UZa" secondAttribute="centerY" id="uyY-Ps-vgP"/>
-                                        <constraint firstItem="TyJ-7z-rjc" firstAttribute="centerY" secondItem="FRu-k5-UZa" secondAttribute="centerY" id="vdE-gj-Wnx"/>
-                                        <constraint firstItem="TyJ-7z-rjc" firstAttribute="width" secondItem="FRu-k5-UZa" secondAttribute="width" multiplier="0.20017" id="wtH-Kp-us9"/>
-                                        <constraint firstItem="6OG-69-l8q" firstAttribute="width" secondItem="FRu-k5-UZa" secondAttribute="width" multiplier="0.389313" id="yM2-8q-a4N"/>
-                                        <constraint firstItem="Ip7-ci-wu4" firstAttribute="leading" secondItem="FRu-k5-UZa" secondAttribute="leading" constant="5" id="ydB-UN-x3S"/>
-                                    </constraints>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="btnLeagueTableVCButton" destination="TyJ-7z-rjc" id="Se5-Q9-yjl"/>
-                                    <outlet property="imgLeagueTableVCImage" destination="Ip7-ci-wu4" id="rsG-it-AXo"/>
-                                    <outlet property="lblLeagueTableVCLabel" destination="6OG-69-l8q" id="U2k-E5-2ox"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -217,12 +151,41 @@
                     </tabBar>
                     <connections>
                         <segue destination="kUM-Or-ILE" kind="relationship" relationship="viewControllers" id="edA-ux-zkw"/>
-                        <segue destination="Tf2-j7-Axd" kind="relationship" relationship="viewControllers" id="9qX-dp-LNH"/>
+                        <segue destination="K3U-iW-JgT" kind="relationship" relationship="viewControllers" id="1CT-u1-gKF"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7B6-4s-a1R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="978" y="-464"/>
+        </scene>
+        <!--Favourite-->
+        <scene sceneID="IPu-LN-kvB">
+            <objects>
+                <tableViewController id="K3U-iW-JgT" customClass="FavouriteLeagueTableVC" customModule="SportsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="vT3-aZ-BW7">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="XYm-Z3-995">
+                                <rect key="frame" x="0.0" y="50" width="393" height="47.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XYm-Z3-995" id="laZ-Y0-9sd">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="47.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="K3U-iW-JgT" id="XVU-vt-vVQ"/>
+                            <outlet property="delegate" destination="K3U-iW-JgT" id="wup-6C-esN"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Favourite" image="star" catalog="system" id="TmE-Yh-JYZ"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="opy-M9-NiI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2097" y="-713"/>
         </scene>
         <!--CollectionVC-->
         <scene sceneID="x9e-Qo-xuU">
@@ -433,20 +396,12 @@
     </scenes>
     <resources>
         <image name="football" catalog="system" width="128" height="123"/>
-        <image name="photo" catalog="system" width="128" height="93"/>
         <image name="star" catalog="system" width="128" height="116"/>
-        <image name="video" catalog="system" width="128" height="82"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemIndigoColor">
             <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemTealColor">
-            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="tintColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
