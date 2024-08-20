@@ -19,7 +19,7 @@ class SportsVC: UICollectionViewController,UICollectionViewDelegateFlowLayout {
     }
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.navigationItem.title = "Sports"
-       
+        
     }
 
 
