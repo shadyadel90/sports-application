@@ -16,7 +16,7 @@ class LeaguesTableVC: UITableViewController {
     var leaguesArray = [League]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tableView.register(UINib(nibName: "LeagueTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -54,23 +54,24 @@ class LeaguesTableVC: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LeaguesTableCell
-        
-        cell.imgLeagueTableVCImage.layer.cornerRadius = cell.imgLeagueTableVCImage.frame.size.height / 2
-        cell.imgLeagueTableVCImage.layer.masksToBounds = true
-        
-        cell.lblLeagueTableVCLabel.text = leaguesArray[indexPath.row].leagueName
-        //FIXME: apply mvvm
-        let url = URL(string: leaguesArray[indexPath.row].leagueLogo ?? "")
-        if url != nil {
-            cell.imgLeagueTableVCImage.kf.setImage(with: url, placeholder: UIImage(named: sport!))
-        } else {
-            cell.imgLeagueTableVCImage.image = UIImage(named: sport!)
-        }
-        cell.btnLeagueTableVCButton.tag = indexPath.row
-        cell.btnLeagueTableVCButton.addTarget(self, action: #selector(youtubeButtonTapped(_:)), for: .touchUpInside)
-        
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LeagueTableViewCell
+        cell.img.image = UIImage(systemName: "pencil")
+        cell.lbl.text = "12345678890"
+//        cell.imgLeagueTableVCImage.layer.cornerRadius = cell.imgLeagueTableVCImage.frame.size.height / 2
+//        cell.imgLeagueTableVCImage.layer.masksToBounds = true
+//        
+//        cell.lblLeagueTableVCLabel.text = leaguesArray[indexPath.row].leagueName
+//        //FIXME: apply mvvm
+//        let url = URL(string: leaguesArray[indexPath.row].leagueLogo ?? "")
+//        if url != nil {
+//            cell.imgLeagueTableVCImage.kf.setImage(with: url, placeholder: UIImage(named: sport!))
+//        } else {
+//            cell.imgLeagueTableVCImage.image = UIImage(named: sport!)
+//        }
+//        cell.btnLeagueTableVCButton.tag = indexPath.row
+//        cell.btnLeagueTableVCButton.addTarget(self, action: #selector(youtubeButtonTapped(_:)), for: .touchUpInside)
+//        
+//        
         
         return cell
     }
