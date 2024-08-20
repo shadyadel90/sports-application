@@ -83,13 +83,9 @@ class CollectionVC: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 2 {
-            // Instantiate the team details view controller
-           // let teamDetailsVC = TeamDetailsViewController()
-            print("team Details")
-            // Configure the teamDetailsVC if needed, e.g., pass data to it
-            
-            // Present the view controller modally
-            //present(teamDetailsVC, animated: true, completion: nil)
+        
+            let teamDetailsVC = self.storyboard?.instantiateViewController(identifier: "TeamDetailVC") as! TeamDetailVC
+           present(teamDetailsVC, animated: true, completion: nil)
         }
     }
     
