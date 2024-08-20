@@ -11,6 +11,7 @@
 		F228D7862C73C2D80047817A /* ImageAndLabelCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228D7812C73C2D80047817A /* ImageAndLabelCollectionCell.swift */; };
 		F228D7872C73C2D80047817A /* singleImageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228D7822C73C2D80047817A /* singleImageCollectionCell.swift */; };
 		F228D7882C73C2D80047817A /* TribleCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228D7832C73C2D80047817A /* TribleCollectionCell.swift */; };
+		F228D78D2C7473540047817A /* TeamDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228D78C2C7473540047817A /* TeamDetailVC.swift */; };
 		F23122452C6CAAEC009DC080 /* SportsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23122442C6CAAEC009DC080 /* SportsVC.swift */; };
 		F23122472C6CAC4C009DC080 /* SportsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23122462C6CAC4C009DC080 /* SportsCell.swift */; };
 		F231224B2C6CC861009DC080 /* LeaguesTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F231224A2C6CC861009DC080 /* LeaguesTableVC.swift */; };
@@ -54,6 +55,7 @@
 		F228D7812C73C2D80047817A /* ImageAndLabelCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAndLabelCollectionCell.swift; sourceTree = "<group>"; };
 		F228D7822C73C2D80047817A /* singleImageCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = singleImageCollectionCell.swift; sourceTree = "<group>"; };
 		F228D7832C73C2D80047817A /* TribleCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TribleCollectionCell.swift; sourceTree = "<group>"; };
+		F228D78C2C7473540047817A /* TeamDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailVC.swift; sourceTree = "<group>"; };
 		F23122442C6CAAEC009DC080 /* SportsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsVC.swift; sourceTree = "<group>"; };
 		F23122462C6CAC4C009DC080 /* SportsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsCell.swift; sourceTree = "<group>"; };
 		F231224A2C6CC861009DC080 /* LeaguesTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaguesTableVC.swift; sourceTree = "<group>"; };
@@ -126,6 +128,22 @@
 				F273941D2C732A3100559BB1 /* event.swift */,
 			);
 			path = model;
+			sourceTree = "<group>";
+		};
+		F228D78B2C7472BE0047817A /* TeamDetails */ = {
+			isa = PBXGroup;
+			children = (
+				F228D78E2C7473590047817A /* view */,
+			);
+			path = TeamDetails;
+			sourceTree = "<group>";
+		};
+		F228D78E2C7473590047817A /* view */ = {
+			isa = PBXGroup;
+			children = (
+				F228D78C2C7473540047817A /* TeamDetailVC.swift */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 		F27394122C72658D00559BB1 /* model */ = {
@@ -204,29 +222,30 @@
 			path = App_SceneDelegates;
 			sourceTree = "<group>";
 		};
-		F2B561462C7214F9006923E3 /* sports */ = {
+		F2B561462C7214F9006923E3 /* AllSports */ = {
 			isa = PBXGroup;
 			children = (
 				F273941C2C7321C400559BB1 /* view */,
 			);
-			path = sports;
+			path = AllSports;
 			sourceTree = "<group>";
 		};
-		F2B561472C72150F006923E3 /* leagues */ = {
+		F2B561472C72150F006923E3 /* Leagues */ = {
 			isa = PBXGroup;
 			children = (
 				F27394122C72658D00559BB1 /* model */,
 				F273941B2C7321BC00559BB1 /* view */,
 			);
-			path = leagues;
+			path = Leagues;
 			sourceTree = "<group>";
 		};
 		F2B561482C721519006923E3 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				F2B561462C7214F9006923E3 /* sports */,
-				F2B561472C72150F006923E3 /* leagues */,
+				F2B561462C7214F9006923E3 /* AllSports */,
+				F2B561472C72150F006923E3 /* Leagues */,
 				F228D7842C73C2D80047817A /* LeaguesDetails */,
+				F228D78B2C7472BE0047817A /* TeamDetails */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -392,6 +411,7 @@
 				F23122452C6CAAEC009DC080 /* SportsVC.swift in Sources */,
 				F23122472C6CAC4C009DC080 /* SportsCell.swift in Sources */,
 				F228D7862C73C2D80047817A /* ImageAndLabelCollectionCell.swift in Sources */,
+				F228D78D2C7473540047817A /* TeamDetailVC.swift in Sources */,
 				F228D7852C73C2D80047817A /* CollectionVC.swift in Sources */,
 				F29769622C6CA73900DFE2EA /* AppDelegate.swift in Sources */,
 				F231224F2C6CC89D009DC080 /* LeaguesTableCell.swift in Sources */,
