@@ -2,11 +2,10 @@
 //  SportsAppTests.swift
 //  SportsAppTests
 //
-//  Created by Shady Adel on 14/08/2024.
+//  Created by Shady Adel on 23/08/2024.
 //
 
 import XCTest
-@testable import SportsApp
 
 final class SportsAppTests: XCTestCase {
 
@@ -28,7 +27,7 @@ final class SportsAppTests: XCTestCase {
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
-        self.measure {
+        measure {
             // Put the code you want to measure the time of here.
         }
     }

@@ -8,21 +8,84 @@
 import UIKit
 import Alamofire
 import Kingfisher
+
 class CollectionVC: UICollectionViewController {
     
-    var upcomingEvents: [Event] = []
-    var latestResults: [Event] = []
+    var upcomingEvents: [football] = []
+    var latestResults: [football] = []
     var Teams = [Team]()
-    
+    var sport: String?
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.collectionViewLayout = createLayout()
         collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
-        
+//        switch sportType {
+//        case "football":
+//            upcomingEvents = [football]()
+//            latestResults = [football]()
+//            Teams = [Team]()
+//        case "tennis":
+//            upcomingEvents = [tennis]()
+//            latestResults = [tennis]()
+//        case .none:
+//            ""
+//        case .some(_):
+//            ""
+//        }
         
         fetchUpcomingEvents()
         fetchlatestResults()
+        let button = UIBarButtonItem(title: "Action", style: .plain, target: self, action: #selector(buttonTapped))
+            navigationItem.rightBarButtonItem = button
+        
+//        fetchJSON(from: "https://apiv2.allsportsapi.com/tennis/?met=Fixtures&APIkey=76a51d962bba98945a8f0f16a8b272400dfcea841cf0b303f9ab3c6e20aaee0f&from=\(getDatesForUrl().0)&to=\(getDatesForUrl().1)", as: tennisResponse.self) { result in
+//            print(result)
+//        }
     }
+    @objc func buttonTapped() {
+        // Handle button tap
+    }
+
+    func fetchJSON<T: Decodable>(from url: String, as type: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
+        if let url = URL(string: url){
+            AF.request(url).validate().responseDecodable(of: T.self) { response in
+                switch response.result {
+                case .success(let value):
+                    completion(.success(value))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    
+    func getDatesForUrl() -> (String,String){
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        var currentDay = ""
+        var nextDay = ""
+        
+        let currentDate = Date()
+        currentDay = dateFormatter.string(from: currentDate)
+        let calendar = Calendar.current
+        if let nextDate = calendar.date(byAdding: .day, value: 1, to: currentDate) {
+            nextDay = dateFormatter.string(from: nextDate)
+        }
+        return (currentDay,nextDay)
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     func fetchUpcomingEvents(){
         
         let dateFormatter = DateFormatter()
@@ -36,8 +99,9 @@ class CollectionVC: UICollectionViewController {
         if let nextDate = calendar.date(byAdding: .day, value: 1, to: currentDate) {
             nextDay = dateFormatter.string(from: nextDate)
         }
-        let baseUrl = URL(string: "https://apiv2.allsportsapi.com/football/?met=Fixtures&APIkey=76a51d962bba98945a8f0f16a8b272400dfcea841cf0b303f9ab3c6e20aaee0f&from=\(currentDay)&to=\(nextDay)")
-        AF.request(baseUrl!).responseDecodable(of: EventsResponse.self) { response in
+        
+        let baseUrl = URL(string: "https://apiv2.allsportsapi.com/\(String(describing: sport!))/?met=Fixtures&APIkey=76a51d962bba98945a8f0f16a8b272400dfcea841cf0b303f9ab3c6e20aaee0f&from=\(currentDay)&to=\(nextDay)")
+        AF.request(baseUrl!).responseDecodable(of: footballResponse.self) { response in
             switch response.result {
             case .success(let eventResponse):
                 for item in 0...10 {
@@ -71,8 +135,8 @@ class CollectionVC: UICollectionViewController {
         if let nextDate = calendar.date(byAdding: .day, value: -1, to: currentDate) {
             dayBefore = dateFormatter.string(from: nextDate)
         }
-        let baseUrl = URL(string: "https://apiv2.allsportsapi.com/football/?met=Fixtures&APIkey=76a51d962bba98945a8f0f16a8b272400dfcea841cf0b303f9ab3c6e20aaee0f&from=\(dayBefore)&to=\(currentDay)")
-        AF.request(baseUrl!).responseDecodable(of: EventsResponse.self) { response in
+        let baseUrl = URL(string: "https://apiv2.allsportsapi.com/\(sport!)/?met=Fixtures&APIkey=76a51d962bba98945a8f0f16a8b272400dfcea841cf0b303f9ab3c6e20aaee0f&from=\(dayBefore)&to=\(currentDay)")
+        AF.request(baseUrl!).responseDecodable(of: footballResponse.self) { response in
             switch response.result {
             case .success(let eventResponse):
                 for item in 0...10 {
@@ -150,6 +214,7 @@ class CollectionVC: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        print(sport)
         switch indexPath.section {
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UpcomingEvent", for: indexPath) as! UpcomingEvent
@@ -163,29 +228,29 @@ class CollectionVC: UICollectionViewController {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "tribleCell", for: indexPath) as! TribleCollectionCell
             let latestResult = latestResults[indexPath.row]
             
-            let url = URL(string: latestResults[indexPath.row].homelogo!)
+            let url = URL(string: latestResults[indexPath.row].homelogo ?? "")
             if url != nil {
-                cell.leftimg.kf.setImage(with: url, placeholder: UIImage(named: "football"))
+                cell.leftimg.kf.setImage(with: url, placeholder: UIImage(named: "\(sport)"))
             } else {
-                cell.leftimg.image = UIImage(named: "football")
+                cell.leftimg.image = UIImage(named: "\(sport)")
             }
          
             
-            let url2 = URL(string: latestResults[indexPath.row].awaylogo!)
+            let url2 = URL(string: latestResults[indexPath.row].awaylogo ?? "")
             if url2 != nil {
-                cell.rightimg.kf.setImage(with: url2, placeholder: UIImage(named: "football"))
+                cell.rightimg.kf.setImage(with: url2, placeholder: UIImage(named: "\(sport)"))
             } else {
-                cell.rightimg.image = UIImage(named: "football")
+                cell.rightimg.image = UIImage(named: "\(sport)")
             }
             cell.scorelbl.text = latestResult.score
             return cell
         case 2:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "singleCell", for: indexPath) as! singleImageCollectionCell
-            let url = URL(string: Teams[indexPath.row].logo!)
+            let url = URL(string: Teams[indexPath.row].logo ?? "")
             if url != nil {
-                cell.img.kf.setImage(with: url, placeholder: UIImage(named: "football"))
+                cell.img.kf.setImage(with: url, placeholder: UIImage(named: "\(sport)"))
             } else {
-                cell.img.image = UIImage(named: "football")
+                cell.img.image = UIImage(named: "\(sport)")
             }
             cell.layer.cornerRadius = cell.frame.height / 2
             

@@ -11,14 +11,16 @@ import UIKit
 
 class SportsVC: UICollectionViewController,UICollectionViewDelegateFlowLayout {
 
-    let sportsArray = ["football","tennis", "basketball", "cricket"]
+    
+    var presenter: SportsPresenter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        presenter = SportsPresenter()
     }
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.navigationItem.title = "Sports"
+        collectionView.layoutSubviews()
         
     }
 
@@ -33,12 +35,12 @@ class SportsVC: UICollectionViewController,UICollectionViewDelegateFlowLayout {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
        
-        return sportsArray.count
+        return presenter?.sportsArrayCount() ?? 1
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let leagueVC = self.storyboard?.instantiateViewController(withIdentifier: "leagueVc") as? LeaguesTableVC {
-            leagueVC.sport = sportsArray[indexPath.row]
+            leagueVC.sport = presenter?.sportsElement(indexPath.row)
             self.navigationController?.pushViewController(leagueVC, animated: true)
         }
     }
@@ -47,65 +49,27 @@ class SportsVC: UICollectionViewController,UICollectionViewDelegateFlowLayout {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SportsCell
+        
         cell.imgMainSportImage.layer.cornerRadius = 20
         cell.imgMainSportImage.layer.masksToBounds = true
         
-        cell.imgMainSportImage.image = UIImage(named: sportsArray[indexPath.row])
-        cell.lblMainSportLabel.text = sportsArray[indexPath.row].capitalized
+        cell.imgMainSportImage.image = UIImage(named: presenter?.sportsElement(indexPath.row) ?? "football")
+        cell.lblMainSportLabel.text = presenter?.sportsElement(indexPath.row).capitalized ?? ""
        
-    
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let numberOfItemsPerRow: CGFloat = 2
-        let spacingBetweenCells: CGFloat = 10
-        
-        let totalSpacing = (2 * spacingBetweenCells) + ((numberOfItemsPerRow - 1) * spacingBetweenCells)
-        let width = (collectionView.bounds.width - totalSpacing) / numberOfItemsPerRow
-        
-        return CGSize(width: width, height: width)
+        return CGSize(width: (self.view.bounds.width) / 2, height: (self.view.bounds.width + 20) / 2)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+        return 0
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+        return 0
     }
    
-   
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
 
 }

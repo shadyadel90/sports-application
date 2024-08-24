@@ -88,7 +88,7 @@ class LeaguesTableVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let leagueDetails = self.storyboard?.instantiateViewController(withIdentifier: "CollectionVC") as! CollectionVC
-        
+        leagueDetails.sport = sport
         present(leagueDetails, animated: true)
     }
     
