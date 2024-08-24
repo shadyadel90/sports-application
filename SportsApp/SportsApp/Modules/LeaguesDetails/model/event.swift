@@ -9,16 +9,48 @@
 import Foundation
 
 
-struct Event: Decodable {
-    let home: String
-    let away: String
-    let date: String
-    let time: String
-    let score: String
+
+struct tennis: Decodable {
+    let leagueName: String?
+    let leagueKey: Int?
+    let time: String?
+    let date: String?
+    let home: String?
+    let homeKey: Int?
+    let away: String?
+    let awayKey: Int?
     let homelogo: String?
     let awaylogo: String?
-    let homeKey: Int
-    let awayKey: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case leagueName = "league_name"
+        case leagueKey = "league_key"
+        case time = "event_time"
+        case date = "event_date"
+        case home = "event_first_player"
+        case homeKey = "first_player_key"
+        case away = "event_second_player"
+        case awayKey = "second_player_key"
+        case homelogo = "event_first_player_logo"
+        case awaylogo = "event_second_player_logo"
+    }
+}
+
+struct tennisResponse: Decodable {
+    let success: Int
+    let result: [tennis]
+}
+
+struct football: Decodable {
+    let home: String?
+    let away: String?
+    let date: String?
+    let time: String?
+    let score: String?
+    let homelogo: String?
+    let awaylogo: String?
+    let homeKey: Int?
+    let awayKey: Int?
     
     enum CodingKeys: String, CodingKey {
         case home = "event_home_team"
@@ -33,34 +65,9 @@ struct Event: Decodable {
     }
 }
 
-struct EventsResponse: Decodable {
-    let result: [Event]
+struct footballResponse: Decodable {
+    let result: [football]
 }
-
-
-struct Result: Decodable {
-    
-    let homeTeam: String
-    let awayTeam: String
-    let score: String
-    let date: String
-    let time: String
-    
-    enum CodingKeys: String, CodingKey {
-        case homeTeam = "event_home_team"
-        case awayTeam = "event_away_team"
-        case score = "event_final_result"
-        case date = "event_date"
-        case time = "event_time"
-        
-        
-    }
-}
-
-struct ResultsResponse: Decodable {
-    let result: [Result]
-}
-
 
 struct Team {
     let name: String?
