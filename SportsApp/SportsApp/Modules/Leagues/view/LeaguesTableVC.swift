@@ -21,12 +21,7 @@ class LeaguesTableVC: UITableViewController {
         
     }
     
-    @objc func addToFavorites() {
-        // Add your favorite logic here
-        print("Add to Favorites tapped")
-        // You can also show an alert or update your data model
-    }
-    
+   
     override func viewWillAppear(_ animated: Bool) {
         //FIXME: move to model
         let baseUrl = URL(string: "https://apiv2.allsportsapi.com/\(sport ??  "football")/?met=Leagues&APIkey=76a51d962bba98945a8f0f16a8b272400dfcea841cf0b303f9ab3c6e20aaee0f")
@@ -47,8 +42,6 @@ class LeaguesTableVC: UITableViewController {
             }
         }
         
-          let favoriteButton = UIBarButtonItem(title: "", image: UIImage(systemName: "heart"), target: self, action: #selector(addToFavorites))
-          navigationItem.rightBarButtonItems = [favoriteButton]
     }
     
     // MARK: - Table view data source
@@ -87,8 +80,9 @@ class LeaguesTableVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let leagueDetails = self.storyboard?.instantiateViewController(withIdentifier: "CollectionVC") as! CollectionVC
+        let leagueDetails = self.storyboard?.instantiateViewController(withIdentifier: "LeagueDetailsVC") as! LeagueDetailsVC
         leagueDetails.sport = sport
+        
         present(leagueDetails, animated: true)
     }
     
