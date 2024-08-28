@@ -12,11 +12,13 @@ struct LeagueResponse: Codable {
 }
 
 struct League: Codable {
-    let leagueName: String
+    let leagueName: String?
     let leagueLogo: String?
+    let leagueKey: Int32?
 
     enum CodingKeys: String, CodingKey {
         case leagueName = "league_name"
         case leagueLogo = "league_logo"
+        case leagueKey = "league_key"
     }
 }

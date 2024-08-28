@@ -51,6 +51,9 @@ struct football: Decodable {
     let awaylogo: String?
     let homeKey: Int?
     let awayKey: Int?
+    let league_name: String?
+    let league_logo:  String?
+    let league_key: Int32?
     
     enum CodingKeys: String, CodingKey {
         case home = "event_home_team"
@@ -62,6 +65,9 @@ struct football: Decodable {
         case awaylogo = "away_team_logo"
         case homeKey = "home_team_key"
         case awayKey = "away_team_key"
+        case league_name = "league_name"
+        case league_logo = "league_logo"
+        case league_key = "league_key"
     }
 }
 

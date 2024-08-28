@@ -57,7 +57,6 @@
                                         <constraint firstAttribute="trailing" secondItem="iKs-UV-edt" secondAttribute="trailing" id="TKZ-Ym-dpg"/>
                                         <constraint firstItem="w1Y-DJ-teY" firstAttribute="top" secondItem="nte-Ak-f2d" secondAttribute="top" constant="142" id="Zxg-ci-gez"/>
                                         <constraint firstItem="w1Y-DJ-teY" firstAttribute="leading" secondItem="nte-Ak-f2d" secondAttribute="leading" constant="1" id="cpI-Mn-C06"/>
-                                        <constraint firstItem="iKs-UV-edt" firstAttribute="width" secondItem="nte-Ak-f2d" secondAttribute="width" multiplier="0.994444" id="jgI-Ob-iaH"/>
                                         <constraint firstAttribute="bottom" secondItem="w1Y-DJ-teY" secondAttribute="bottom" constant="10" id="tJA-Kz-dRB"/>
                                     </constraints>
                                 </collectionViewCellContentView>

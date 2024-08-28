@@ -17,42 +17,25 @@ class LeagueDetailsVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     var latestResults: [football] = []
     var Teams = [Team]()
     var sport: String?
+    var league: League?
+    var favItem: UIBarButtonItem?
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated: animated)
+        fetchUpcomingEvents()
+        fetchlatestResults()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+     
        favouriteButton()
+       _ = checkFavButton()
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.collectionViewLayout = createLayout()
         collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
-        //        switch sportType {
-        //        case "football":
-        //            upcomingEvents = [football]()
-        //            latestResults = [football]()
-        //            Teams = [Team]()
-        //        case "tennis":
-        //            upcomingEvents = [tennis]()
-        //            latestResults = [tennis]()
-        //        case .none:
-        //            ""
-        //        case .some(_):
-        //            ""
-        //        }
-        
-        fetchUpcomingEvents()
-        fetchlatestResults()
-        let button = UIBarButtonItem(title: "Action", style: .plain, target: self, action: #selector(buttonTapped))
-        navigationItem.rightBarButtonItem = button
-        
-        //        fetchJSON(from: "https://apiv2.allsportsapi.com/tennis/?met=Fixtures&APIkey=76a51d962bba98945a8f0f16a8b272400dfcea841cf0b303f9ab3c6e20aaee0f&from=\(getDatesForUrl().0)&to=\(getDatesForUrl().1)", as: tennisResponse.self) { result in
-        //            print(result)
-        //        }
+     
     }
-    @objc func buttonTapped() {
-        // Handle button tap
-    }
+   
     
     func fetchJSON<T: Decodable>(from url: String, as type: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
         if let url = URL(string: url){
@@ -83,47 +66,40 @@ class LeagueDetailsVC: UIViewController,UICollectionViewDelegate,UICollectionVie
         return (currentDay,nextDay)
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    func fetchUpcomingEvents(){
-        
+    func fetchUpcomingEvents() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        var currentDay = ""
-        var nextDay = ""
         
         let currentDate = Date()
-        currentDay = dateFormatter.string(from: currentDate)
+        let currentDay = dateFormatter.string(from: currentDate)
         let calendar = Calendar.current
-        if let nextDate = calendar.date(byAdding: .day, value: 1, to: currentDate) {
-            nextDay = dateFormatter.string(from: nextDate)
+        let nextDay = dateFormatter.string(from: calendar.date(byAdding: .day, value: 1, to: currentDate)!)
+        
+        guard let sport = sport,
+              let leagueKey = league?.leagueKey,
+              let baseUrl = URL(string: "https://apiv2.allsportsapi.com/\(sport)/?met=Fixtures&leagueid=\(leagueKey)&APIkey=76a51d962bba98945a8f0f16a8b272400dfcea841cf0b303f9ab3c6e20aaee0f&from=\(currentDay)&to=\(nextDay)") else {
+            return
         }
         
-        let baseUrl = URL(string: "https://apiv2.allsportsapi.com/\(String(describing: sport!))/?met=Fixtures&APIkey=76a51d962bba98945a8f0f16a8b272400dfcea841cf0b303f9ab3c6e20aaee0f&from=\(currentDay)&to=\(nextDay)")
-        AF.request(baseUrl!).responseDecodable(of: footballResponse.self) { response in
+       
+        
+        AF.request(baseUrl).responseDecodable(of: footballResponse.self) { response in
             switch response.result {
             case .success(let eventResponse):
-                for item in 0...10 {
-                    self.upcomingEvents.append(eventResponse.result[item])
-                    let event = eventResponse.result[item]
-                    let hometeam = Team(name: event.home, logo: event.homelogo, key: event.homeKey)
-                    let awayteam = Team(name: event.away, logo: event.awaylogo, key: event.awayKey)
-                    self.Teams.append(hometeam)
-                    self.Teams.append(awayteam)
+                self.upcomingEvents = Array(eventResponse.result.prefix(10))
+                self.Teams = self.upcomingEvents.flatMap { event in
+                    [
+                        Team(name: event.home, logo: event.homelogo, key: event.homeKey),
+                        Team(name: event.away, logo: event.awaylogo, key: event.awayKey)
+                    ]
                 }
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
+                
             case .failure(let error):
                 print("Error fetching data: \(error)")
             }
-            
         }
     }
     
@@ -140,13 +116,14 @@ class LeagueDetailsVC: UIViewController,UICollectionViewDelegate,UICollectionVie
         if let nextDate = calendar.date(byAdding: .day, value: -1, to: currentDate) {
             dayBefore = dateFormatter.string(from: nextDate)
         }
-        let baseUrl = URL(string: "https://apiv2.allsportsapi.com/\(sport!)/?met=Fixtures&APIkey=76a51d962bba98945a8f0f16a8b272400dfcea841cf0b303f9ab3c6e20aaee0f&from=\(dayBefore)&to=\(currentDay)")
+        let baseUrl = URL(string: "https://apiv2.allsportsapi.com/\(sport!)/?met=Fixtures&leagueid=\(String(describing: league!.leagueKey))&APIkey=76a51d962bba98945a8f0f16a8b272400dfcea841cf0b303f9ab3c6e20aaee0f&from=\(dayBefore)&to=\(currentDay)")
+       
         AF.request(baseUrl!).responseDecodable(of: footballResponse.self) { response in
             switch response.result {
             case .success(let eventResponse):
                 for item in 0...10 {
                     self.latestResults.append(eventResponse.result[item])
-                    print(eventResponse.result[item])
+                    //print(eventResponse.result[item])
                 }
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
@@ -219,49 +196,51 @@ class LeagueDetailsVC: UIViewController,UICollectionViewDelegate,UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print(sport)
+        
         switch indexPath.section {
         case 0:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UpcomingEvent", for: indexPath) as! UpcomingEvent
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UpcomingEvent", for: indexPath) as? UpcomingEvent else {
+                fatalError("Unable to dequeue UpcomingEvent cell")
+            }
             let event = upcomingEvents[indexPath.row]
-            cell.lblVS.text = "\(event.home) VS \(event.away)"
-            cell.lbldate.text = "\(event.date)"
-            cell.lbltime.text = "\(event.time)"
+            cell.lblVS.text = "\(event.home ?? "Unknown") VS \(event.away ?? "Unknown")"
+            cell.lbldate.text = event.date
+            cell.lbltime.text = event.time
             cell.layer.cornerRadius = 20
             return cell
+            
         case 1:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "tribleCell", for: indexPath) as! TribleCollectionCell
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "tribleCell", for: indexPath) as? TribleCollectionCell else {
+                fatalError("Unable to dequeue TribleCollectionCell")
+            }
             let latestResult = latestResults[indexPath.row]
             
-            let url = URL(string: latestResults[indexPath.row].homelogo ?? "")
-            if url != nil {
-                cell.leftimg.kf.setImage(with: url, placeholder: UIImage(named: "\(sport)"))
-            } else {
-                cell.leftimg.image = UIImage(named: "\(sport)")
-            }
+            loadImage(urlString: latestResult.homelogo, placeholder: sport!, imageView: cell.leftimg)
+            loadImage(urlString: latestResult.awaylogo, placeholder: sport!, imageView: cell.rightimg)
             
-            
-            let url2 = URL(string: latestResults[indexPath.row].awaylogo ?? "")
-            if url2 != nil {
-                cell.rightimg.kf.setImage(with: url2, placeholder: UIImage(named: "\(sport)"))
-            } else {
-                cell.rightimg.image = UIImage(named: "\(sport)")
-            }
             cell.scorelbl.text = latestResult.score
             return cell
+            
         case 2:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "singleCell", for: indexPath) as! singleImageCollectionCell
-            let url = URL(string: Teams[indexPath.row].logo ?? "")
-            if url != nil {
-                cell.img.kf.setImage(with: url, placeholder: UIImage(named: "\(sport)"))
-            } else {
-                cell.img.image = UIImage(named: "\(sport)")
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "singleCell", for: indexPath) as? singleImageCollectionCell else {
+                fatalError("Unable to dequeue singleImageCollectionCell")
             }
-            cell.layer.cornerRadius = cell.frame.height / 2
+            let team = Teams[indexPath.row]
+            
+            loadImage(urlString: team.logo, placeholder: sport!, imageView: cell.img)
             
             return cell
+            
         default:
             fatalError("Unexpected section index: \(indexPath.section)")
+        }
+    }
+
+    private func loadImage(urlString: String?, placeholder: String, imageView: UIImageView) {
+        if let urlString = urlString, let url = URL(string: urlString) {
+            imageView.kf.setImage(with: url, placeholder: UIImage(named: placeholder))
+        } else {
+            imageView.image = UIImage(named: placeholder)
         }
     }
     
@@ -307,13 +286,44 @@ class LeagueDetailsVC: UIViewController,UICollectionViewDelegate,UICollectionVie
 
         let navItem = UINavigationItem()
         navItem.title = "League Detail"
-        let favItem = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: nil)
+        favItem = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favBtnTapped))
         navItem.rightBarButtonItem = favItem
  
         navBar.setItems([navItem], animated: false)
         
 
         view.addSubview(navBar)
+    }
+    
+    
+    
+    @objc func favBtnTapped(){
+        if checkFavButton() {
+            favItem?.image = UIImage(systemName: "heart.fill")
+            CoreDataManager.shared.saveLeague(self.league!)
+        }
+        else {
+            favItem?.image = UIImage(systemName: "heart")
+            CoreDataManager.shared.removeLeague(self.league!)
+        }
+    }
+    
+    func checkFavButton() -> Bool{
+        var leaguesCheck = [League]()
+        
+            if let leagueEntities = CoreDataManager.shared.fetchLeagues() {
+                let leagues = leagueEntities.map { League(leagueName: $0.leagueName!, leagueLogo: $0.leagueLogo,leagueKey: Int32($0.leagueKey)) }
+                leaguesCheck = leagues
+            }
+        
+        for item in leaguesCheck {
+            if item.leagueKey == league?.leagueKey {
+                favItem?.image = UIImage(systemName: "heart.fill")
+                return false
+            }
+        }
+        favItem?.image = UIImage(systemName: "heart")
+        return true
     }
     
 }
