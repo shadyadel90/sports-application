@@ -74,7 +74,7 @@ class LeaguesTableVC: UITableViewController {
         cell.btn.tag = indexPath.row
         cell.btn.addTarget(self, action: #selector(youtubeButtonTapped(_:)), for: .touchUpInside)
         
-        
+        cell.layer.cornerRadius = cell.frame.height / 2
         
         return cell
     }
@@ -82,7 +82,7 @@ class LeaguesTableVC: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let leagueDetails = self.storyboard?.instantiateViewController(withIdentifier: "LeagueDetailsVC") as! LeagueDetailsVC
         leagueDetails.sport = sport
-        
+        leagueDetails.league = leaguesArray[indexPath.row]
         present(leagueDetails, animated: true)
     }
     
