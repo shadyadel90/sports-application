@@ -12,11 +12,14 @@ import UIKit
 class SportsVC: UICollectionViewController,UICollectionViewDelegateFlowLayout {
 
     
-    var presenter: SportsPresenter?
+    var presenter: SportsArrayManipulator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter = SportsPresenter()
+        
+        presenter  = SportsPresenter()
+
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.navigationItem.title = "Sports"
@@ -36,6 +39,7 @@ class SportsVC: UICollectionViewController,UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
        
         return presenter?.sportsArrayCount() ?? 1
+
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
