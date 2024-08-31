@@ -15,7 +15,7 @@ protocol SportsArrayManipulator {
 
 class SportsPresenter: SportsArrayManipulator {
     
-    let sportsArray = ["football","tennis", "basketball", "cricket"]
+   private let sportsArray = ["football","tennis", "basketball", "cricket"]
     
     
     func sportsArrayCount()->Int {
@@ -24,7 +24,12 @@ class SportsPresenter: SportsArrayManipulator {
     }
     
     func sportsElement(_ index: Int) -> String {
-        return sportsArray[index]
+        if (index < sportsArrayCount() && index > -1) {
+            return sportsArray[index]
+        }
+        else {
+            return ""
+        }
         
     }
 }
