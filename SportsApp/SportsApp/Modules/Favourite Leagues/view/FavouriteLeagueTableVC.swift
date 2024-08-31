@@ -37,9 +37,13 @@ class FavouriteLeagueTableVC: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LeagueTableViewCell
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? LeagueTableViewCell else { return LeagueTableViewCell() }
+        
         guard let league = presenter?.displayLeaguesElement(indexPath.row) else { return cell }
+        
         let url = URL(string: league.leagueLogo ?? "")
+        
         cell.img.kf.setImage(with: url, placeholder: UIImage(systemName: "photo"))
         cell.lbl.text = league.leagueName
         cell.btn.tag = indexPath.row
@@ -59,7 +63,6 @@ class FavouriteLeagueTableVC: UITableViewController {
         
         let videoID = sender.accessibilityLabel ?? "k4MNDLU9ejQ"
         if presenter?.openYouTubeLink(videoID) == false {
-            // Show an alert if the URL cannot be opened
             let alert = UIAlertController(title: "Cannot Open Link",
                                           message: "Unable to open the video. Please check your internet connection or try again later.",
                                           preferredStyle: .alert)

@@ -21,25 +21,37 @@ class FavouriteLeaguePresenter: FavouriteLeagueManipulator {
     var displayLeagues = [League]()
     
     func displayLeaguesCount() -> Int {
-        return displayLeagues.count
+        if displayLeagues.isEmpty {
+            return 0
+        }
+        else {
+            return displayLeagues.count
+        }
+      
     }
     
     func displayLeaguesElement(_ index: Int) -> League{
-        return displayLeagues[index]
+        if index > 0 && index < displayLeaguesCount() {
+            return displayLeagues[index]
+        }
+      return League(leagueName: "", leagueLogo: "", leagueKey: 0)
     }
     
     func loadLeagues(completion: ()->()) {
         if let leagueEntities = CoreDataManager.shared.fetchLeagues() {
-            let leagues = leagueEntities.map { League(leagueName: $0.leagueName!, leagueLogo: $0.leagueLogo,leagueKey: Int32($0.leagueKey)) }
+            let leagues = leagueEntities.map { League(leagueName: $0.leagueName!, leagueLogo: $0.leagueLogo, leagueKey: Int32($0.leagueKey)) }
             self.displayLeagues = leagues
             completion()
         }
         
     }
     
-    func removeLeagueFromPersistence(_ index:Int ){
-        CoreDataManager.shared.removeLeague(displayLeagues[index])
-        displayLeagues.remove(at: index)
+    func removeLeagueFromPersistence(_ index: Int){
+        if index > 0 && index < displayLeaguesCount() {
+            CoreDataManager.shared.removeLeague(displayLeagues[index])
+            displayLeagues.remove(at: index)
+        }
+        
     }
     
     func openYouTubeLink(_ videoID: String) -> Bool {
