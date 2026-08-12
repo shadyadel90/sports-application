@@ -24,8 +24,13 @@ class LeaguesTableVC: UITableViewController {
    
     override func viewWillAppear(_ animated: Bool) {
         //FIXME: move to model
-        let baseUrl = URL(string: "https://apiv2.allsportsapi.com/\(sport ??  "football")/?met=Leagues&APIkey=REDACTED_ALLSPORTS_API_KEY")
-        AF.request(baseUrl!).responseDecodable(of: LeagueResponse.self) { response in
+        let apiKey = APIConfig.allSportsAPIKey
+        guard !apiKey.isEmpty,
+              let baseUrl = URL(string: "https://apiv2.allsportsapi.com/\(sport ??  "football")/?met=Leagues&APIkey=\(apiKey)") else {
+            print("Missing ALLSPORTS_API_KEY environment variable")
+            return
+        }
+        AF.request(baseUrl).responseDecodable(of: LeagueResponse.self) { response in
             switch response.result {
             case .success(let leagueResponse):
                 self.leaguesArray = leagueResponse.result

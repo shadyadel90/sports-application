@@ -75,9 +75,11 @@ class LeagueDetailsVC: UIViewController,UICollectionViewDelegate,UICollectionVie
         let calendar = Calendar.current
         let nextDay = dateFormatter.string(from: calendar.date(byAdding: .day, value: 1, to: currentDate)!)
         
+        let apiKey = APIConfig.allSportsAPIKey
         guard let sport = sport,
               let leagueKey = league?.leagueKey,
-              let baseUrl = URL(string: "https://apiv2.allsportsapi.com/\(sport)/?met=Fixtures&leagueid=\(leagueKey)&APIkey=REDACTED_ALLSPORTS_API_KEY&from=\(currentDay)&to=\(nextDay)") else {
+              !apiKey.isEmpty,
+              let baseUrl = URL(string: "https://apiv2.allsportsapi.com/\(sport)/?met=Fixtures&leagueid=\(leagueKey)&APIkey=\(apiKey)&from=\(currentDay)&to=\(nextDay)") else {
             return
         }
         
@@ -116,9 +118,14 @@ class LeagueDetailsVC: UIViewController,UICollectionViewDelegate,UICollectionVie
         if let nextDate = calendar.date(byAdding: .day, value: -1, to: currentDate) {
             dayBefore = dateFormatter.string(from: nextDate)
         }
-        let baseUrl = URL(string: "https://apiv2.allsportsapi.com/\(sport!)/?met=Fixtures&leagueid=\(String(describing: league!.leagueKey))&APIkey=REDACTED_ALLSPORTS_API_KEY&from=\(dayBefore)&to=\(currentDay)")
+        let apiKey = APIConfig.allSportsAPIKey
+        guard !apiKey.isEmpty,
+              let baseUrl = URL(string: "https://apiv2.allsportsapi.com/\(sport!)/?met=Fixtures&leagueid=\(String(describing: league!.leagueKey))&APIkey=\(apiKey)&from=\(dayBefore)&to=\(currentDay)") else {
+            print("Missing ALLSPORTS_API_KEY environment variable")
+            return
+        }
        
-        AF.request(baseUrl!).responseDecodable(of: footballResponse.self) { response in
+        AF.request(baseUrl).responseDecodable(of: footballResponse.self) { response in
             switch response.result {
             case .success(let eventResponse):
                 for item in 0...10 {

@@ -39,4 +39,5 @@ The repository includes XCTest coverage for sports and favourite-league behavior
 1. Clone the repository.
 2. Open `SportsApp/SportsApp.xcodeproj` in Xcode.
 3. Resolve Swift Package Manager dependencies.
-4. Build and run on an iOS Simulator.
+4. Create an AllSportsAPI key, then add `ALLSPORTS_API_KEY` as an environment variable in the Xcode scheme (Product → Scheme → Edit Scheme → Run → Arguments → Environment Variables).
+5. Build and run on an iOS Simulator.

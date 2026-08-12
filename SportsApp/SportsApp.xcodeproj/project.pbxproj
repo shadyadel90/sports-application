@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		518A2ACFC2BF424E8554E420 /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BA5A60EA704B688FD30627 /* APIConfig.swift */; };
 		F228D7862C73C2D80047817A /* UpcomingEventCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228D7812C73C2D80047817A /* UpcomingEventCollectionCell.swift */; };
 		F228D7872C73C2D80047817A /* singleImageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228D7822C73C2D80047817A /* singleImageCollectionCell.swift */; };
 		F228D7882C73C2D80047817A /* TribleCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228D7832C73C2D80047817A /* TribleCollectionCell.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		85BA5A60EA704B688FD30627 /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
 		F228D7812C73C2D80047817A /* UpcomingEventCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingEventCollectionCell.swift; sourceTree = "<group>"; };
 		F228D7822C73C2D80047817A /* singleImageCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = singleImageCollectionCell.swift; sourceTree = "<group>"; };
 		F228D7832C73C2D80047817A /* TribleCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TribleCollectionCell.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 		F228D79C2C747BCB0047817A /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				85BA5A60EA704B688FD30627 /* APIConfig.swift */,
 				F228D79D2C747BD20047817A /* Network */,
 			);
 			path = Helper;
@@ -436,6 +439,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				518A2ACFC2BF424E8554E420 /* APIConfig.swift in Sources */,
 				F228D7882C73C2D80047817A /* TribleCollectionCell.swift in Sources */,
 				F27394142C7265A500559BB1 /* LeagueModel.swift in Sources */,
 				F231224B2C6CC861009DC080 /* LeaguesTableVC.swift in Sources */,
